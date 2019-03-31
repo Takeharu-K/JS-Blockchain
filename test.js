@@ -1,27 +1,46 @@
 const Blockchain = require('./blockchain');
 
-const takecoin = new Blockchain(1111, 'qqqqqqqqq', 'wwwwwwwww');
+const takecoin = new Blockchain();
+console.log(takecoin);
 
-takecoin.createNewTransaction(11, 'erqwreqwer', 'qrweqwerq');
+takecoin.createNewTransaction(1000,'ALICE','BOB');
 
-takecoin.createNewBlock(111,'erqwerqwe','rqwerqwerq');
+function mining(takecoin){
+    const lastBlock = takecoin.getLastBlock();
+    const previousBlockHash = lastBlock['hash'];
 
-const currentBlockData = [
-    {
-      amount: 10,
-      sender: "ALICE090970FYFFYFYFIF",
-      recipient: "BOB797789790JFJFFGFJF"
-    },
-    {
-      amount: 30,
-      sender: "ALICGHIUGUGOOIGODYGDHFD",
-      recipient: "BOBTYSHGHOUHOHOHOHOHO"
-    },
-    {
-      amount: 200,
-      sender: "ALICEHJGUGUTETEEUUCVVUVUV",
-      recipient: "BOBGIUGIUGIUDRTESREAREUY"
-    }
-];
+    const currentBlockData = {
+        transactions: takecoin.pendingTransactions,
+        index: lastBlock['index'] + 1
+    };
 
-console.log(takecoin.hashBlock('adfasdfa',currentBlockData,1111));
+    const nonce = takecoin.proofOfWork(previousBlockHash, currentBlockData);
+
+    const blockHash = takecoin.hashBlock(
+        previousBlockHash,
+        currentBlockData,
+        nonce
+    );
+
+    const newBlock = takecoin.createNewBlock(nonce, previousBlockHash, blockHash);
+}
+
+mining(takecoin);
+
+takecoin.createNewTransaction(
+    200,
+    "ALICE",
+    "BOB"
+   );
+   
+   mining(takecoin);
+   
+   takecoin.createNewTransaction(
+    300,
+    "BOB",
+    "ALICE"
+   );
+   
+   mining(takecoin);
+   
+   console.log(takecoin);
