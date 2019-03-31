@@ -1,7 +1,7 @@
 class Blockchain {
 
     constructor(nonce, previousBlockHash, hash){
-        this.chian = [];
+        this.chain = [];
         this.pendingTransaction = [];
 
         const newBlock = {
@@ -17,3 +17,4 @@ class Blockchain {
     }
 }
 
+module.exports = Blockchain;
