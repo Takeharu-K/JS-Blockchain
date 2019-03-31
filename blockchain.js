@@ -26,6 +26,20 @@ class Blockchain {
             previousBlockHash: previousBlockHash
         });
     }
+
+    getLastBlock(){
+        return this.chain[this.chain.length -1];
+    }
+
+    createNewTransaction(amount, sender, to){
+        this.pendingTransaction.push({
+            amount: amount,
+            sender: sender,
+            to: to
+        });
+
+        return this.getLastBlock()['index'] + 1;
+    }
 }
 
 module.exports = Blockchain;
