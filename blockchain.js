@@ -1,3 +1,5 @@
+const sha256 = require('sha256');
+
 class Blockchain {
 
     constructor(nonce, previousBlockHash, hash){
@@ -39,6 +41,11 @@ class Blockchain {
         });
 
         return this.getLastBlock()['index'] + 1;
+    }
+
+    hashBlock(previousBlockHash, currentBlockData, nonce){
+        const dataAsString = previousBlockHash + nonce.toString() + JSON.stringify(currentBlockData);
+        return sha256(dataAsString);
     }
 }
 
