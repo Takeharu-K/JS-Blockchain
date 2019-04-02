@@ -33,14 +33,14 @@ takecoin.createNewTransaction(
     "BOB"
    );
    
-   mining(takecoin);
+mining(takecoin);
    
-   takecoin.createNewTransaction(
+takecoin.createNewTransaction(
     300,
     "BOB",
     "ALICE"
-   );
+    );
    
-   mining(takecoin);
+mining(takecoin);
    
-   console.log(takecoin);
+console.log(takecoin);
