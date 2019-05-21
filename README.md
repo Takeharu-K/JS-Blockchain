@@ -7,6 +7,7 @@ P2P通信とブロックの伝搬などは何もしていない．
 
 今後やる予定．
 
+#使い方
 ```
 npm install
 node test.js
